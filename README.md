@@ -11,6 +11,13 @@ Conception et implémentation d'un logiciel fictif de _"Gestion de cours"_.
 - Teacher
 - Student
 
+## Entités
+
+- Teacher
+- Student
+- Matter
+- Course
+
 ## Modélisation des relations entre entités
 
 - Teacher has many Courses (1/N)
