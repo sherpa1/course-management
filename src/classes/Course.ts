@@ -3,12 +3,12 @@ import Student from "./Student";
 import Teacher from "./Teacher";
 import moment from "moment";
 
-export default class Lesson {
+export default class Course {
   static COMING = "coming";
   static DOING = "doing";
   static DONE = "done";
 
-  static STATES = [Lesson.COMING, Lesson.DOING, Lesson.DONE];
+  static STATES = [Course.COMING, Course.DOING, Course.DONE];
 
   private _start_at: Date;
   private _end_at: Date;
@@ -16,9 +16,9 @@ export default class Lesson {
   private _state: string;
   private _subject: string;
 
-  private _matter: Matter; //Lesson belongs to Matter
-  private _students: Array<Student> = []; //Lesson has and belongs to many students
-  private _teacher: Teacher; //Lesson has one Teacher
+  private _matter: Matter; //Course belongs to Matter
+  private _students: Array<Student> = []; //Course has and belongs to many students
+  private _teacher: Teacher; //Course has one Teacher
 
   private _duration: number;
 
@@ -41,7 +41,7 @@ export default class Lesson {
     if (matter === undefined) throw new Error(`matter arg must be defined`);
 
     this._matter = matter;
-    this._matter.add_lesson(this);
+    this._matter.add_course(this);
 
     if (start_at === undefined) throw new Error(`start_at must be defined`);
 
@@ -49,14 +49,14 @@ export default class Lesson {
 
     this._end_at = moment(this._start_at).add(this._duration, "hour").toDate();
 
-    this._state = Lesson.COMING;
+    this._state = Course.COMING;
   }
 
   start(): boolean {
-    if (this._state === Lesson.COMING) {
-      this._state = Lesson.DOING;
+    if (this._state === Course.COMING) {
+      this._state = Course.DOING;
       console.log(
-        `📘 Lesson : "${this.subject}" started ${moment(this._start_at).format(
+        `📘 Course : "${this.subject}" started ${moment(this._start_at).format(
           "DD/MM/YYYY HH:mm"
         )} \n`
       );
@@ -69,10 +69,10 @@ export default class Lesson {
   }
 
   end() {
-    if (this._state === Lesson.DOING) {
-      this._state = Lesson.DONE;
+    if (this._state === Course.DOING) {
+      this._state = Course.DONE;
       console.log(
-        `📘 Lesson : "${this.subject}" ended ${moment(this._end_at).format(
+        `📘 Course : "${this.subject}" ended ${moment(this._end_at).format(
           "DD/MM/YYYY HH:mm"
         )} \n`
       );
@@ -90,18 +90,18 @@ export default class Lesson {
         !this._students.find((element) => element.fullname === student.fullname)
       ) {
         this._students.push(student);
-        student.add_lesson(this);
-        console.log(`📘 Lesson : has a new Student "${student.fullname}"\n`);
+        student.add_course(this);
+        console.log(`📘 Course : has a new Student "${student.fullname}"\n`);
       } else {
         console.error(
-          `Student : can't register to lesson "${this.subject}" since he is already registered`
+          `Student : can't register to Course "${this.subject}" since he is already registered`
         );
       }
     }
   }
 
   toString(): string {
-    return `Lesson : "${this.subject}" (${
+    return `Course : "${this.subject}" (${
       this._matter.name
     }), starts at : ${moment(this._start_at).format(
       "DD/MM/YYYY HH:mm"

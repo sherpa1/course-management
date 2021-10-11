@@ -1,8 +1,8 @@
-import Lesson from "./Lesson";
+import Course from "./Course";
 
 export default class Matter {
   private _name: string;
-  private _lessons: Array<Lesson> = []; //Matter has many Lessons
+  private _courses: Array<Course> = []; //Matter has many Courses
 
   constructor(name: string) {
     if (name === undefined) throw new Error(`name must be defined`);
@@ -13,16 +13,16 @@ export default class Matter {
     return this._name;
   }
 
-  add_lesson(lesson: Lesson) {
-    if (lesson === undefined) throw new Error(`lesson must be defined`);
+  add_course(course: Course) {
+    if (course === undefined) throw new Error(`Course must be defined`);
     console.log(
-      `📂 Matter : "${this._name}" has a new lesson : "${lesson.subject}"\n`
+      `📂 Matter : "${this._name}" has a new Course : "${course.subject}"\n`
     );
-    if (!this._lessons.find((element) => element.subject === lesson.subject))
-      this._lessons.push(lesson);
+    if (!this._courses.find((element) => element.subject === course.subject))
+      this._courses.push(course);
     else
       throw new Error(
-        `can't add "${lesson.add_student}" since its already belongs to "${this._name}"`
+        `can't add "${course.add_student}" since its already belongs to "${this._name}"`
       );
   }
 }

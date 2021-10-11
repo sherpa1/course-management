@@ -1,11 +1,11 @@
 import People from "./People";
-import Lesson from "./Lesson";
+import Course from "./Course";
 
 export default class Student extends People {
-  private _lessons: Array<Lesson> = []; //Student has and belongs to many Lessons
+  private _courses: Array<Course> = []; //Student has and belongs to many Courses
 
-  public get lessons(): Array<Lesson> {
-    return this._lessons;
+  public get courses(): Array<Course> {
+    return this._courses;
   }
 
   constructor(firstname_arg: string, lastname_arg: string, gender_arg: number) {
@@ -16,15 +16,15 @@ export default class Student extends People {
     return `${this.fullname}`;
   }
 
-  add_lesson(lesson: Lesson) {
-    if (!this._lessons.find((element) => element.subject === lesson.subject))
-      this._lessons.push(lesson);
+  add_course(course: Course) {
+    if (!this._courses.find((element) => element.subject === course.subject))
+      this._courses.push(course);
     else
       throw new Error(
-        `Lesson "${lesson.subject}" already belongs to ${this._fullname}`
+        `Course "${course.subject}" already belongs to ${this._fullname}`
       );
     console.log(
-      `🤵‍ Student : "${this.fullname}" has a new lesson : "${lesson.subject}" \n`
+      `🤵‍ Student : "${this.fullname}" has a new Course : "${course.subject}" \n`
     );
   }
 }

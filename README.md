@@ -13,10 +13,14 @@ Conception et implémentation d'un logiciel fictif de _"Gestion de cours"_.
 
 ## Modélisation des relations entre entités
 
-- Teacher has and belongs to many Lessons (N/N)
-- Student has and belongs to many Lessons (N/N)
+- Teacher has many Courses (1/N)
 - Lesson belongs to Matter (N/1)
-- Matter has many Lessons (1/N)
+- Student has and belongs to many Courses (N/N)
+- Course has and belongs to many Students (N/N)
+- Lesson has and belongs to many Students (N/N)
+- Student has and belongs to many Courses (N/N)
+- Matter has many Courses (1/N)
+- Course belongs to one Matter (N/1)
 
 ## Spécifications techniques
 
@@ -81,25 +85,25 @@ Pendant son exécution, le logiciel génére des logs directement affiché dans 
 #### Exemple de résultat attendu
 
 ```
-📂 Matter : "Italian" has a new lesson : "Greetings in italian for beginners"
+📂 Matter : "Italian" has a new Course : "Greetings in italian for beginners"
 
-🤵‍ Student : "Bart Feest" has a new lesson : "Greetings in italian for beginners"
+🤵‍ Student : "Bart Feest" has a new Course : "Greetings in italian for beginners"
 
-📘 Lesson : has a new Student "Bart Feest"
+📘 Course : has a new Student "Bart Feest"
 
-🤵‍ Student : "Nannie Terry" has a new lesson : "Greetings in italian for beginners"
+🤵‍ Student : "Nannie Terry" has a new Course : "Greetings in italian for beginners"
 
-📘 Lesson : has a new Student "Nannie Terry"
+📘 Course : has a new Student "Nannie Terry"
 
-🤵‍ Student : "Laurence Considine" has a new lesson : "Greetings in italian for beginners"
+🤵‍ Student : "Laurence Considine" has a new Course : "Greetings in italian for beginners"
 
-📘 Lesson : has a new Student "Laurence Considine"
+📘 Course : has a new Student "Laurence Considine"
 
-🤵‍ Teacher "John Doe" is teaching lesson "Greetings in italian for beginners"
+🤵‍ Teacher "John Doe" is teaching Course "Greetings in italian for beginners"
 
-📘 Lesson : "Greetings in italian for beginners" started 10/10/2021 19:00
+📘 Course : "Greetings in italian for beginners" started 10/10/2021 19:00
 
-📘 Lesson : "Greetings in italian for beginners" ended 10/10/2021 20:00
+📘 Course : "Greetings in italian for beginners" ended 10/10/2021 20:00
 ```
 
 ---

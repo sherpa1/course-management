@@ -1,12 +1,12 @@
 import People from "./People";
-import Lesson from "./Lesson";
+import Course from "./Course";
 
 export default class Teacher extends People {
-  private _current_lesson;
-  private _lessons: Array<Lesson> = [];
+  private _current_course;
+  private _courses: Array<Course> = []; //Teacher has many courses
 
-  public get current_lesson() {
-    return this._current_lesson;
+  public get current_course() {
+    return this._current_course;
   }
 
   constructor(
@@ -17,41 +17,41 @@ export default class Teacher extends People {
     super(firstname_arg, lastname_arg, gender_arg);
   }
 
-  add_lesson(...lessons: Array<Lesson>) {
-    for (const lesson of lessons) {
+  add_course(...courses: Array<Course>) {
+    for (const course of courses) {
       if (
-        !this._lessons.findIndex(
-          (element) => element.subject === lesson.subject
+        !this._courses.findIndex(
+          (element) => element.subject === course.subject
         )
       )
-        this._lessons.push(lesson);
+        this._courses.push(course);
       else
         throw new Error(
-          `Lesson "${lesson.subject}" already belongs to ${this.fullname}`
+          `Course "${course.subject}" already belongs to ${this.fullname}`
         );
       console.log(
-        `🤵‍ Teacher : "${this.fullname}" has a new lesson "${lesson.subject}"\n`
+        `🤵‍ Teacher : "${this.fullname}" has a new Course "${course.subject}"\n`
       );
     }
   }
 
-  teach(lesson: Lesson) {
-    if (lesson === undefined)
-      throw new Error(`lesson argument must be defined`);
+  teach(course: Course) {
+    if (course === undefined)
+      throw new Error(`Course argument must be defined`);
 
     if (
-      !this._lessons.findIndex((element) => element.subject === lesson.subject)
+      !this._courses.findIndex((element) => element.subject === course.subject)
     )
       throw new Error(
-        `Lesson "${lesson.subject}" is not part of ${this.fullname}'s lessons`
+        `Course "${course.subject}" is not part of ${this.fullname}'s courses`
       );
 
-    this._current_lesson = lesson;
-    this._current_lesson.teacher = this;
+    this._current_course = course;
+    this._current_course.teacher = this;
     console.log(
-      `🤵‍ Teacher "${this.fullname}" is teaching lesson "${lesson.subject}"\n`
+      `🤵‍ Teacher "${this.fullname}" is teaching Course "${course.subject}"\n`
     );
-    lesson.start();
-    lesson.end();
+    course.start();
+    course.end();
   }
 }
